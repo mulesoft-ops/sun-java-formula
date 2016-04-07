@@ -36,6 +36,18 @@ unpack-jdk-tarball:
     - onchanges:
       - cmd: download-jdk-tarball
 
+create-java-alternative:
+  alternatives.install:
+    - name: java
+    - link: /usr/bin/java
+    - path: {{ java.java_real_home }}/bin/java
+    - priority: 1
+
+set-java-alternative:
+  alternatives.set:
+    - name: java
+    - path: {{ java.java_real_home }}/bin/java
+
 create-java-home:
   alternatives.install:
     - name: java-home
@@ -50,6 +62,7 @@ update-java-home-symlink:
   file.symlink:
     - name: {{ java.java_home }}
     - target: {{ java.java_real_home }}
+    - force: true
 
 remove-jdk-tarball:
   file.absent:
