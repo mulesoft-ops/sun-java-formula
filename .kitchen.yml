@@ -1,0 +1,37 @@
+---
+driver:
+  name: ec2
+  instance_type: m3.medium
+  aws_ssh_key_id: <%= ENV["USER"] %>
+
+platforms:
+  - name: amazon
+    driver:
+      image_id: ami-6dc1507a
+    transport:
+      username: ec2-user
+  - name: ubuntu
+    driver:
+      image_id: ami-c45a94a9
+    transport:
+      username: ubuntu
+
+provisioner:
+  name: salt_master
+  master_script: sudo salt-call --local service.start salt-master
+  formulas:
+    - .
+  salt_top:
+    base:
+      '*':
+        - sun-java
+
+suites:
+  - name: java
+
+transport:
+  name: ssh
+  ssh_key: ~/.ssh/id_rsa
+
+verifier:
+  name: inspec

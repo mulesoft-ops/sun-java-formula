@@ -1,2 +1,3 @@
-.idea
-
+.kitchen.local.yml
+.kitchen/
+Gemfile.lock
