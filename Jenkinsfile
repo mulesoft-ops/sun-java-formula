@@ -1,7 +1,7 @@
 #!groovy
 
 // Run integration tests
-formulaIntegration()
+//formulaIntegration()
 
 if (env.BRANCH_NAME == "master") {
   // Publish a new gem version to Nexus
