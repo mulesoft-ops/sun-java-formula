@@ -1,7 +1,7 @@
 name: sun-java
 os: Amazon, Ubuntu
 os_family: RedHat, Debian
-version: 0.1
+version: 0.2
 release: 0
 summary: Formula for java.
 description: Formula for java.
