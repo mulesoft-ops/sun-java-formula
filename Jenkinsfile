@@ -1,16 +1,28 @@
 #!groovy
+supportedEnvs = ['devx', 'qax', 'stgx', 'stgxdr', 'prod']
+automaticEnvs = ['devx', 'qax', 'stgx', 'stgxdr']
 
-// Run integration tests
-//formulaIntegration()
+properties([
+  parameters([
+    choice(choices: '\n' + supportedEnvs.join('\n'), description: 'Target environment (blank for all)', name: 'Environment'),
+    booleanParam(defaultValue: true, description: 'Run Integration Tests?', name: 'Tests')
+  ]),
+  pipelineTriggers([])
+])
+
+deployEnvs = env.Environment ? [env.Environment] : automaticEnvs
+
+if (env.Tests == 'true')
+  formulaIntegration()
 
 if (env.BRANCH_NAME == "master") {
   // Publish a new gem version to Nexus
   formulaPublish()
 
   // Deploy to environments
-  for (deploy_env in ['dev', 'qa', 'qax', 'stg', 'stgx', 'prod']) {
-    formulaDeploy {
-      environment = deploy_env
-    }
+  for (deployEnv in deployEnvs) {
+    formulaDeploy(
+      environment: deployEnv
+    )
   }
 }
