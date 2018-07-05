@@ -1,5 +1,5 @@
 #!groovy
-supportedEnvs = ['devx', 'qax', 'stgx', 'stgxdr', 'prod']
+supportedEnvs = ['devx', 'qax', 'stgx', 'stgxdr', 'prod-eu', 'prod']
 automaticEnvs = ['devx', 'qax', 'stgx', 'stgxdr']
 
 properties([
