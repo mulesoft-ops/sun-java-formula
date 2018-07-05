@@ -5,7 +5,7 @@ automaticEnvs = ['devx', 'qax', 'stgx', 'stgxdr']
 properties([
   parameters([
     choice(choices: '\n' + supportedEnvs.join('\n'), description: 'Target environment (blank for all)', name: 'Environment'),
-    booleanParam(defaultValue: true, description: 'Run Integration Tests?', name: 'Tests')
+    booleanParam(defaultValue: false, description: 'Run Integration Tests?', name: 'Tests')
   ]),
   pipelineTriggers([])
 ])
